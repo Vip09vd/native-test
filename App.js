@@ -20,7 +20,7 @@ export default class App extends Component {
 			<View style={styles.container}>
 				<View style={styles.header}>
 					<Text style={styles.headerText}>
-						GAGGLON
+						GOOD STORE
 					</Text>
 				</View>
 				<ItemList/>
@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
 	},
 	headerText: {
 		color: '#fff',
-		fontSize: 16,
-		padding: 10
+		fontSize: 24,
+		padding: 10,
+		fontWeight: '600'
 	}
 });
