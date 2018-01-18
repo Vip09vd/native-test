@@ -13,8 +13,17 @@ import {
 } from 'react-native';
 import ItemList from './app/Components/ItemsList';
 import Footer from './app/Components/Footer';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getPhones } from './app/Selectors/selectors';
+import { getData } from './app/Actions/mainActions';
 
-export default class App extends Component {
+class App extends Component {
+
+	componentWillMount() {
+		this.props.getPhones();
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -23,7 +32,7 @@ export default class App extends Component {
 						GOOD STORE
 					</Text>
 				</View>
-				<ItemList/>
+				<ItemList items={this.props.phones}/>
 				<Footer/>
 			</View>
 		);
@@ -47,3 +56,18 @@ const styles = StyleSheet.create({
 		fontWeight: '600'
 	}
 });
+
+
+function mapStateToProps(state) {
+	return {
+		phones: getPhones(state),
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		getPhones: bindActionCreators(getData, dispatch)
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
